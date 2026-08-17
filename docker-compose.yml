@@ -8,7 +8,7 @@ services:
       - SERVER_PORT=2333
       - LAVALINK_SERVER_PASSWORD=youshallnotpass
       - LAVALINK_SERVER_SOURCES_YOUTUBE=false
-      - LAVALINK_PLUGINS_0_DEPENDENCY=dev.lavalink.youtube:youtube-plugin:1.11.4
+      - LAVALINK_PLUGINS_0_DEPENDENCY=dev.lavalink.youtube:youtube-plugin:1.18.2
       - LAVALINK_PLUGINS_0_REPOSITORY=https://maven.lavalink.dev/releases
       - LAVALINK_PLUGINS_YOUTUBE_CLIENTS_0=MUSIC
       - LAVALINK_PLUGINS_YOUTUBE_CLIENTS_1=ANDROID
