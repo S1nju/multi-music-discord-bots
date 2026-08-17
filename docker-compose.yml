@@ -6,6 +6,8 @@ services:
     restart: always
     environment:
       - _JAVA_OPTIONS=-Xmx1G
+    env_file:
+      - .env
     volumes:
       - ./application.yml:/opt/Lavalink/application.yml
     networks:
