@@ -14,8 +14,8 @@ class MusicBot(commands.Bot):
         intents.message_content = True
         intents.voice_states = True
         self.channel_id = os.getenv("BOT_CHANNEL_ID")
-        # Prefix is statically "-" as requested
-        super().__init__(command_prefix="-", intents=intents, help_command=None)
+        prefix = os.getenv("BOT_PREFIX", "-")
+        super().__init__(command_prefix=commands.when_mentioned_or(prefix), intents=intents, help_command=None)
 
     async def setup_hook(self):
         cogs_dir = os.path.join(os.path.dirname(__file__), 'src', 'cogs')

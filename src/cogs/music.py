@@ -11,17 +11,49 @@ class MusicCog(commands.Cog):
 
     async def get_player(self, ctx: commands.Context) -> wavelink.Player:
         player: wavelink.Player = cast(wavelink.Player, ctx.guild.voice_client)
-        if not player:
+        
+        if not ctx.author.voice:
+            await ctx.send("❌ يجب أن تكون في غرفة البوت الصوتية لاستخدام الأوامر.", delete_after=10)
+            return None
+            
+        strict_channel_id = getattr(self.bot, 'channel_id', None)
+        if strict_channel_id and ctx.author.voice.channel.id != int(strict_channel_id):
+            await ctx.send(f"❌ عذراً، هذا البوت مخصص فقط في هذه الغرفة: <#{strict_channel_id}>", delete_after=10)
+            return None
+
+        if player:
+            if ctx.author.voice.channel.id != player.channel.id:
+                await ctx.send("❌ أنت لست في نفس الغرفة الصوتية الخاصة بالبوت.", delete_after=10)
+                return None
+            return player
+        else:
             try:
-                if ctx.author.voice:
-                    player = await ctx.author.voice.channel.connect(cls=wavelink.Player)
-                else:
-                    await ctx.send("❌ يجب أن تكون في غرفة صوتية.")
-                    return None
+                player = await ctx.author.voice.channel.connect(cls=wavelink.Player)
+                return player
             except Exception as e:
                 await ctx.send(f"❌ خطأ بالاتصال: `{e}`")
                 return None
-        return player
+
+    @commands.Cog.listener()
+    async def on_voice_state_update(self, member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
+        if member.id != self.bot.user.id:
+            return
+            
+        strict_channel_id = getattr(self.bot, 'channel_id', None)
+        if not strict_channel_id:
+            return
+            
+        home_channel_id = int(strict_channel_id)
+        if after.channel is None or after.channel.id != home_channel_id:
+            guild = member.guild
+            home_channel = guild.get_channel(home_channel_id)
+            if home_channel:
+                try:
+                    if guild.voice_client:
+                        await guild.voice_client.disconnect(force=True)
+                    await home_channel.connect(cls=wavelink.Player)
+                except Exception:
+                    pass
 
     @commands.Cog.listener()
     async def on_wavelink_track_start(self, payload: wavelink.TrackStartEventPayload):
