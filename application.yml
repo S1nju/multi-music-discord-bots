@@ -4,7 +4,7 @@ server:
 
 lavalink:
   plugins:
-    - dependency: "dev.lavalink.youtube:youtube-plugin:1.11.4"
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.18.2"
       repository: "https://maven.lavalink.dev/releases"
     - dependency: "com.github.topi314.lavasrc:lavasrc-plugin:4.4.1"
       repository: "https://maven.lavalink.dev/releases"
@@ -49,8 +49,9 @@ plugins:
     allowDirectPlaylistIds: true
     clients:
       - MUSIC
-      - ANDROID
       - ANDROID_VR
+      - WEBEMBEDDED
+      - TVHTML5EMBEDDED
     # (Residential Proxies) for youtube ip ban
     httpConfig:
       proxyHost: "${PROXY_HOST}" 
