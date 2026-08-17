@@ -1,5 +1,16 @@
 version: '3.8'
 services:
+  lavalink:
+    image: ghcr.io/lavalink-devs/lavalink:4.0.5
+    container_name: lavalink
+    restart: always
+    environment:
+      - _JAVA_OPTIONS=-Xmx1G
+    volumes:
+      - ./application.yml:/opt/Lavalink/application.yml
+    networks:
+      - musicbots
+
   bot1:
     build:
       context: .
