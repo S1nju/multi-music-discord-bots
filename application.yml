@@ -52,7 +52,7 @@ plugins:
       - WEBEMBEDDED
     # (Residential Proxies) for youtube ip ban
     httpConfig:
-      proxyHost: "proxy.ip.here.com" 
-      proxyPort: 8080                
-      proxyUser: "username"          
-      proxyPassword: "password"      
+      proxyHost: "${PROXY_HOST}" 
+      proxyPort: "${PROXY_PORT}"      
+      proxyUser: "${PROXY_USER}"          
+      proxyPassword: "${PROXY_PASSWORD}"      
