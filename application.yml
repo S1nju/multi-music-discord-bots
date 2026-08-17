@@ -47,9 +47,8 @@ plugins:
     allowDirectPlaylistIds: true
     clients:
       - MUSIC
+      - ANDROID
       - ANDROID_VR
-      - WEB
-      - WEBEMBEDDED
     # (Residential Proxies) for youtube ip ban
     httpConfig:
       proxyHost: "${PROXY_HOST}" 
