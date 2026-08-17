@@ -52,8 +52,8 @@ plugins:
       - ANDROID
       - ANDROID_VR
     # (Residential Proxies) for youtube ip ban
-    httpConfig:
-      proxyHost: "${PROXY_HOST}" 
-      proxyPort: "${PROXY_PORT}"      
-      proxyUser: "${PROXY_USER}"          
-      proxyPassword: "${PROXY_PASSWORD}"      
+    # httpConfig:
+    #   proxyHost: "${PROXY_HOST}" 
+    #   proxyPort: "${PROXY_PORT}"      
+    #   proxyUser: "${PROXY_USER}"          
+    #   proxyPassword: "${PROXY_PASSWORD}"      
