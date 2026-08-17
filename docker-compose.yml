@@ -16,116 +16,15 @@ services:
       retries: 12
     networks:
       - musicbots
-  bot1:
+  bots:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: bot1
+    container_name: bots
     restart: always
-    environment:
-      - BOT_TOKEN=${BOT_TOKEN1}
-      - BOT_PREFIX=${BOT_PREFIX1}
-      - BOT_CHANNEL_ID=${BOT_CHANNEL_ID1}
-      - WAVELINK_URI=${WAVELINK_URI}
-      - WAVELINK_PASSWORD=${WAVELINK_PASSWORD}
-    networks:
-      - musicbots
-  bot2:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: bot2
-    restart: always
-    environment:
-      - BOT_TOKEN=${BOT_TOKEN2}
-      - BOT_PREFIX=${BOT_PREFIX2}
-      - BOT_CHANNEL_ID=${BOT_CHANNEL_ID2}
-      - WAVELINK_URI=${WAVELINK_URI}
-      - WAVELINK_PASSWORD=${WAVELINK_PASSWORD}
-    networks:
-      - musicbots
-  bot3:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: bot3
-    restart: always
-    environment:
-      - BOT_TOKEN=${BOT_TOKEN3}
-      - BOT_PREFIX=${BOT_PREFIX3}
-      - BOT_CHANNEL_ID=${BOT_CHANNEL_ID3}
-      - WAVELINK_URI=${WAVELINK_URI}
-      - WAVELINK_PASSWORD=${WAVELINK_PASSWORD}
-    networks:
-      - musicbots
-  bot4:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: bot4
-    restart: always
-    environment:
-      - BOT_TOKEN=${BOT_TOKEN4}
-      - BOT_PREFIX=${BOT_PREFIX4}
-      - BOT_CHANNEL_ID=${BOT_CHANNEL_ID4}
-      - WAVELINK_URI=${WAVELINK_URI}
-      - WAVELINK_PASSWORD=${WAVELINK_PASSWORD}
-    networks:
-      - musicbots
-  bot5:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: bot5
-    restart: always
-    environment:
-      - BOT_TOKEN=${BOT_TOKEN5}
-      - BOT_PREFIX=${BOT_PREFIX5}
-      - BOT_CHANNEL_ID=${BOT_CHANNEL_ID5}
-      - WAVELINK_URI=${WAVELINK_URI}
-      - WAVELINK_PASSWORD=${WAVELINK_PASSWORD}
-    networks:
-      - musicbots
-  bot6:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: bot6
-    restart: always
-    environment:
-      - BOT_TOKEN=${BOT_TOKEN6}
-      - BOT_PREFIX=${BOT_PREFIX6}
-      - BOT_CHANNEL_ID=${BOT_CHANNEL_ID6}
-      - WAVELINK_URI=${WAVELINK_URI}
-      - WAVELINK_PASSWORD=${WAVELINK_PASSWORD}
-    networks:
-      - musicbots
-  bot7:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: bot7
-    restart: always
-    environment:
-      - BOT_TOKEN=${BOT_TOKEN7}
-      - BOT_PREFIX=${BOT_PREFIX7}
-      - BOT_CHANNEL_ID=${BOT_CHANNEL_ID7}
-      - WAVELINK_URI=${WAVELINK_URI}
-      - WAVELINK_PASSWORD=${WAVELINK_PASSWORD}
-    networks:
-      - musicbots
-  bot8:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: bot8
-    restart: always
-    environment:
-      - BOT_TOKEN=${BOT_TOKEN8}
-      - BOT_PREFIX=${BOT_PREFIX8}
-      - BOT_CHANNEL_ID=${BOT_CHANNEL_ID8}
-      - WAVELINK_URI=${WAVELINK_URI}
-      - WAVELINK_PASSWORD=${WAVELINK_PASSWORD}
+    depends_on:
+      - lavalink
+
     networks:
       - musicbots
 
