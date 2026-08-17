@@ -14,10 +14,10 @@ services:
       - LAVALINK_PLUGINS_YOUTUBE_CLIENTS_1=ANDROID
       - LAVALINK_PLUGINS_YOUTUBE_CLIENTS_2=ANDROID_VR
       - LAVALINK_PLUGINS_YOUTUBE_OAUTH_ENABLED=true
-      # - PROXY_HOST=${PROXY_HOST}
-      # - PROXY_PORT=${PROXY_PORT}
-      # - PROXY_USER=${PROXY_USER}
-      # - PROXY_PASSWORD=${PROXY_PASSWORD}
+      - PROXY_HOST=${PROXY_HOST}
+      - PROXY_PORT=${PROXY_PORT}
+      - PROXY_USER=${PROXY_USER}
+      - PROXY_PASSWORD=${PROXY_PASSWORD}
 
     volumes:
       - ./application.yml:/opt/Lavalink/application.yml
