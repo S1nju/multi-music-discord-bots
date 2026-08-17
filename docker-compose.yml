@@ -23,7 +23,8 @@ services:
     container_name: bots
     restart: always
     depends_on:
-      - lavalink
+      lavalink:
+        condition: service_healthy
 
     networks:
       - musicbots
