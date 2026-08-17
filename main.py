@@ -3,7 +3,9 @@ from discord.ext import commands
 import os
 import wavelink
 from dotenv import load_dotenv
+from logging import getLogger
 
+logger = getLogger(__name__)
 load_dotenv()
 
 class MusicBot(commands.Bot):
