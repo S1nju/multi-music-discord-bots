@@ -6,6 +6,7 @@ services:
     restart: always
     environment:
       - _JAVA_OPTIONS=-Xmx1G
+      - SPRING_CONFIG_LOCATION=file:/opt/Lavalink/application.yml
     env_file:
       - .env
     volumes:
