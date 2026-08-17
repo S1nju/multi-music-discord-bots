@@ -7,6 +7,9 @@ services:
     environment:
       - SERVER_PORT=2333
       - LAVALINK_SERVER_PASSWORD=youshallnotpass
+      - LAVALINK_SERVER_SOURCES_YOUTUBE=false
+      - LAVALINK_PLUGINS_0_DEPENDENCY=dev.lavalink.youtube:youtube-plugin:1.11.4
+      - LAVALINK_PLUGINS_0_REPOSITORY=https://maven.lavalink.dev/releases
       - PROXY_HOST=${PROXY_HOST}
       - PROXY_PORT=${PROXY_PORT}
       - PROXY_USER=${PROXY_USER}
