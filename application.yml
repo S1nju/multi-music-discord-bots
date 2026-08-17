@@ -50,3 +50,9 @@ plugins:
       - ANDROID_VR
       - WEB
       - WEBEMBEDDED
+    # (Residential Proxies) for youtube ip ban
+    httpConfig:
+      proxyHost: "proxy.ip.here.com" 
+      proxyPort: 8080                
+      proxyUser: "username"          
+      proxyPassword: "password"      
