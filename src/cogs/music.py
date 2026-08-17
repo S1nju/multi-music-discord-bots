@@ -36,7 +36,14 @@ class MusicCog(commands.Cog):
         if not hasattr(player, "autoplay") or player.autoplay != wavelink.AutoPlayMode.enabled:
             player.autoplay = wavelink.AutoPlayMode.partial
 
-        tracks: wavelink.Search = await wavelink.Playable.search(query, source=wavelink.TrackSource.YouTube)
+        try:
+            tracks: wavelink.Search = await wavelink.Playable.search(query, source=wavelink.TrackSource.YouTube)
+        except wavelink.LavalinkLoadException:
+            try:
+                tracks: wavelink.Search = await wavelink.Playable.search(query, source=wavelink.TrackSource.SoundCloud)
+            except Exception as e:
+                return await ctx.send(f"❌ لم أتمكن من تشغيل المقطع أو أن المنصة محظورة.")
+            
         if not tracks:
             return await ctx.send("❌ لم أتمكن من إيجاد المقطع.", delete_after=10)
 
@@ -202,7 +209,14 @@ class MusicCog(commands.Cog):
     @commands.command(name="search")
     @commands.check(check_chat)
     async def search(self, ctx: commands.Context, *, query: str):
-        tracks: wavelink.Search = await wavelink.Playable.search(query, source=wavelink.TrackSource.YouTube)
+        try:
+            tracks: wavelink.Search = await wavelink.Playable.search(query, source=wavelink.TrackSource.YouTube)
+        except wavelink.LavalinkLoadException:
+            try:
+                tracks: wavelink.Search = await wavelink.Playable.search(query, source=wavelink.TrackSource.SoundCloud)
+            except Exception as e:
+                return await ctx.send(f"❌ خطأ من السيرفر، ربما المنصة محظورة.")
+                
         if not tracks:
             return await ctx.send("❌ لم أتمكن من إيجاد نتائج.")
         
