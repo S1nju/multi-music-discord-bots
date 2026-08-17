@@ -57,7 +57,6 @@ class MusicCog(commands.Cog):
         player = cast(wavelink.Player, ctx.guild.voice_client)
         if player:
             player.queue.clear()
-            await player.disconnect()
             await ctx.send("✅ تم إيقاف التشغيل وحذف القائمة.")
 
     @commands.command(name="skip", aliases=["s"])
