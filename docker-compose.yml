@@ -7,6 +7,11 @@ services:
     environment:
       - SERVER_PORT=2333
       - LAVALINK_SERVER_PASSWORD=youshallnotpass
+      - PROXY_HOST=${PROXY_HOST}
+      - PROXY_PORT=${PROXY_PORT}
+      - PROXY_USER=${PROXY_USER}
+      - PROXY_PASSWORD=${PROXY_PASSWORD}
+
     volumes:
       - ./application.yml:/opt/Lavalink/application.yml
     healthcheck:
