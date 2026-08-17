@@ -11,6 +11,7 @@ class MusicBot(commands.Bot):
         intents = discord.Intents.default()
         intents.message_content = True
         intents.voice_states = True
+        self.channel_id = os.getenv("BOT_CHANNEL_ID")
         # Prefix is statically "-" as requested
         super().__init__(command_prefix="-", intents=intents, help_command=None)
 
@@ -21,7 +22,7 @@ class MusicBot(commands.Bot):
         for filename in os.listdir(cogs_dir):
             if filename.endswith('.py'):
                 await self.load_extension(f'src.cogs.{filename[:-3]}')
-        
+                
         uri = os.getenv("WAVELINK_URI", "http://127.0.0.1:2333")
         password = os.getenv("WAVELINK_PASSWORD", "youshallnotpass")
         node = wavelink.Node(uri=uri, password=password)
@@ -30,6 +31,16 @@ class MusicBot(commands.Bot):
     async def on_ready(self):
         print(f"Logged in as {self.user} (ID: {self.user.id})")
         print("Connected to Wavelink nodes successfully.")
+        if self.channel_id:
+            try:
+                channel = self.get_channel(int(self.channel_id))
+                if channel:
+                    await channel.connect(cls=wavelink.Player)
+                    print(f"Automatically connected to voice channel: {channel.name}")
+                else:
+                    print(f"Could not find voice channel with ID {self.channel_id}")
+            except Exception as e:
+                print(f"Failed to auto-connect to voice channel: {e}")
 
 bot = MusicBot()
 
