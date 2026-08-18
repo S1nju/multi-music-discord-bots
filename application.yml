@@ -3,7 +3,6 @@ server:
   address: 0.0.0.0
 lavalink:
   server:
-    trackStuckThresholdMs: 10000
     sources:
       youtube: false # Using Youtube nativly on lavalink is deprecated, disable it and use https://github.com/lavalink-devs/youtube-source instead.
     password: ${LAVALINK_PASSWORD:youshallnotpass}
@@ -14,7 +13,7 @@ lavalink:
     youtubePlaylistLoadLimit: 3
     opusEncodingQuality: 5
     resamplingQuality: MEDIUM
-    trackStuckThresholdMs: 5000
+    trackStuckThresholdMs: 10000
     playerUpdateInterval: 3
     useSeekGhosting: true
     youtubeSearchEnabled: true
