@@ -14,6 +14,8 @@ services:
       - PROXY_USER=${PROXY_USER}
       - PROXY_PASSWORD=${PROXY_PASSWORD}
       - YOUTUBE_REFRESH_TOKEN=${YOUTUBE_REFRESH_TOKEN}
+      - YOUTUBE_PO_TOKEN=${YOUTUBE_PO_TOKEN}
+      - YOUTUBE_VISITOR_DATA=${YOUTUBE_VISITOR_DATA}
     healthcheck:
       test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --header=\"Authorization: youshallnotpass\" --spider http://127.0.0.1:2333/version || exit 1" ]
       interval: 5s
