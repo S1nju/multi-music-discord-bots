@@ -3,10 +3,9 @@ services:
   lavalink:
     build:
       context: .
-      dockerfile: ./build-lavalink/Dockerfile.lavalink
+      dockerfile: ./docker-lavalink/Dockerfile.lavalink
     container_name: lavalink
     restart: unless-stopped
-
     ports:
       - "2333:2333"
     environment:
@@ -28,8 +27,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 12
-    networks:
-      - musicbots
 
   yt-cipher:
     image: ghcr.io/kikkia/yt-cipher:master
@@ -37,8 +34,6 @@ services:
     restart: unless-stopped
     environment:
       - API_TOKEN=youshallnotpass
-    networks:
-      - musicbots
     ports:
       - "8001:8001"
   # bots:
