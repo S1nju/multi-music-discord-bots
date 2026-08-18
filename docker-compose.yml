@@ -4,6 +4,8 @@ services:
     image: ghcr.io/lavalink-devs/lavalink:4
     container_name: lavalink
     restart: unless-stopped
+    env_file:
+      - .env
     environment:
       - SERVER_PORT=2333
       - LAVALINK_SERVER_PASSWORD=youshallnotpass
@@ -30,6 +32,8 @@ services:
     depends_on:
       lavalink:
         condition: service_healthy
+    env_file:
+      - .env
 
     networks:
       - musicbots
