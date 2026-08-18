@@ -68,14 +68,49 @@ plugins:
     clients:
       - "TV"
       - "WEB"
+      - "ANDROID_MUSIC"
+      - "ANDROID_VR"
+      - "IOS"
       - "MWEB"
+      - "WEBEMBEDDED"
+      - "MUSIC"
     TV:
       playlistLoading: false
       videoLoading: true
       searching: false
       playback: true
-    WEB:
+    TVHTML5_SIMPLY:
       playlistLoading: true
+      videoLoading: true
+      searching: true
+      playback: true
+    ANDROID_VR:
+      playlistLoading: false
+      videoLoading: true
+      searching: true
+      playback: true
+    IOS:
+      playlistLoading: false
+      videoLoading: true
+      searching: true
+      playback: true
+    MUSIC:
+      playlistLoading: false
+      videoLoading: true
+      searching: true
+      playback: true
+    ANDROID_MUSIC:
+      playlistLoading: false
+      videoLoading: true
+      searching: true
+      playback: true
+    WEBEMBEDDED:
+      playlistLoading: false
+      videoLoading: true
+      searching: true
+      playback: true
+    WEB:
+      playlistLoading: false
       videoLoading: true
       searching: true
       playback: true
