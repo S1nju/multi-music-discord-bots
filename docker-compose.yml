@@ -13,6 +13,13 @@ services:
       - YOUTUBE_PO_TOKEN=${YOUTUBE_PO_TOKEN}
       - YOUTUBE_VISITOR_DATA=${YOUTUBE_VISITOR_DATA}
       - IPV6_BLOCK=${IPV6_BLOCK}
+      - YOUTUBE_HTTP_PROXY=${YOUTUBE_HTTP_PROXY}
+      - YOUTUBE_PROXY_URL=${YOUTUBE_PROXY_URL}
+      - YOUTUBE_PROXY_USERNAME=${YOUTUBE_PROXY_USERNAME}
+      - YOUTUBE_PROXY_PASSWORD=${YOUTUBE_PROXY_PASSWORD}
+      - YOUTUBE_OAUTH_TOKEN=${YOUTUBE_OAUTH_TOKEN}
+    env_file:
+      - .env
     healthcheck:
       test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --header=\"Authorization: youshallnotpass\" --spider http://127.0.0.1:2333/version || exit 1" ]
       interval: 5s
@@ -20,12 +27,26 @@ services:
       retries: 12
     networks:
       - musicbots
+
+  yt-cipher:
+    image: ghcr.io/kikkia/yt-cipher:master
+    container_name: yt-cipher
+    restart: unless-stopped
+    environment:
+      - API_TOKEN=youshallnotpass
+    networks:
+      - musicbots
+    ports:
+      - "8001:8001"
+
   bots:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: bots
     restart: always
+    env_file:
+      - .env
     depends_on:
       lavalink:
         condition: service_healthy
