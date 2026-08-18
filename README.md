@@ -14,18 +14,19 @@
 
 ## 🌟 Overview
 
-**Multi-Music Discord Bots** is an enterprise-grade infrastructure capable of running **multiple Discord Music Bots (up to 8) simultaneously** out of a single codebase, mapped to a unified Lavalink V4 Node. 
+**Multi-Music Discord Bots** is an enterprise-grade infrastructure capable of running **multiple Discord Music Bots (up to 9) simultaneously** out of a single codebase, mapped to a unified Lavalink V4 Node. 
 
 Tired of deploying separate containers and repositories for every new bot you want to run? Our robust python `launcher.py` spins up all your bots concurrently inside a single environment under isolated memory pools, ensuring they never clash or face "Singleton Wavelink Pool" overlaps.
 
 ## ✨ Key Features
 
-- **🚀 Multiplexer Engine:** Run 1, 4, or 8 individual music bots directly from `launcher.py` using Subprocesses. Every bot is isolated visually but shares one codebase.
+- **🚀 Multiplexer Engine:** Run up to 9 individual music bots directly from `launcher.py` using Subprocesses. Every bot is isolated visually but shares one codebase.
 - **🎵 Lavalink V4 Integration:** Built specifically for the latest wavelink and Lavalink features, offering lag-free enterprise audio.
 - **🔥 Anti-Hijack & Strict Isolation:** Each bot binds exclusively to a specific voice channel configured in `.env`. If a malicious admin tries to "drag" or disconnect the bot, its aggressive revert protocol immediately bounces it back to its designated Voice Channel.
 - **🎧 Multi-Platform Sourcing:** Supports YouTube, SoundCloud, and Spotify (Powered by Topi's LavaSrc!).
-- **🛡️ YouTube IP Ban Fallback:** When YouTube heavily rate-limits or IP bans your server, the bots will silently swallow the `LavalinkLoadException` and gracefully reroute the user's query to SoundCloud without crashing.
-- **🌍 Residential Proxies Support:** Pre-configured `application.yml` layout allows straightforward integration of Residential Proxies `httpConfig` to definitively bypass YouTube restrictions.
+- **🛡️ YouTube Anti-Bot Bypass:** Uses a `yt-cipher` sidecar natively alongside seamless IPv6 RoutePlanner / residential `httpConfig` proxies to permanently avoid YouTube 429 & Sign-in errors!
+- **⚡ No-Prefix Shortcut:** Configure a custom single letter for each bot (e.g. `a `) to instantly play music without needing a prefix (if left blank, this feature disables natively).
+- **🇸🇦 Full Arabic Support:** Arabic aliases (`بحث`, `تكرار`, `سكب`, إلخ) and interactive Arabic UI.
 
 ---
 
@@ -56,19 +57,21 @@ WAVELINK_PASSWORD=youshallnotpass
 SPOTIFY_CLIENT_ID=your_spotify_client_id
 SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
 
-# --- BOT CONFIGURATIONS (Add up to 8 bots) ---
+# --- BOT CONFIGURATIONS (Add up to 9 bots) ---
 
 # Bot 1
 BOT_TOKEN1=YOUR_DISCORD_BOT_TOKEN_HERE
 BOT_PREFIX1=-
+BOT_PLAY_LETTER1=a
 BOT_CHANNEL_ID1=123456789123456789  # The ONLY channel Bot 1 will respond in and connect to.
 
 # Bot 2
 BOT_TOKEN2=YOUR_DISCORD_BOT_TOKEN_HERE
 BOT_PREFIX2=!
+BOT_PLAY_LETTER2=b
 BOT_CHANNEL_ID2=987654321987654321
 
-# You can keep defining up to BOT_TOKEN8...
+# You can keep defining up to BOT_TOKEN9...
 ```
 
 ### 3. Handle YouTube IP Bans (Optional)
@@ -86,22 +89,25 @@ docker-compose up -d --build
 
 ## 🎮 Bot Commands
 All commands seamlessly work depending on the bot's configured `BOT_PREFIX`. (Mentions also work as a prefix backup!).
+You can also use **Arabic aliases** for all commands (e.g. `سكب`, `بحث`, `تكرار`), and use your configured `BOT_PLAY_LETTER` followed by a space to play music directly without any prefix!
 
 | Command | Description |
 |---|---|
+| `{play_letter} <song>` | (No prefix needed) Quickly searches and plays a song! Example: `a my song` |
+| `help`, `مساعدة` | Comprehensive list of available commands in Arabic. |
 | `play <query/url>` | Search YouTube (Fallbacks to SoundCloud) or play direct URLs. |
-| `search <query>` | Presents an interactive list (1-5) of search results to select from. |
-| `skip`, `s` | Force-skips the current playing track. |
+| `search <query>`, `بحث` | Presents an interactive list (1-5) of search results to select from. |
+| `skip`, `s`, `سكب` | Force-skips the current playing track. |
 | `stop`, `leave` | Clears the queue and stops the bot's playback context. |
 | `pause`, `resume` | Temporarily halts or resumes music playback. |
-| `nowplaying`, `np` | Attractive embed showcasing the live track, duration, and cover art. |
-| `queue`, `q` | Displays the next ten upcoming tracks pending in the queue. |
-| `volume <1-1000>` | Drastically alter playback volume. |
-| `filters <name>` | Engage `bass`, `nightcore`, or `none`. |
+| `nowplaying`, `np`, `الان` | Attractive embed showcasing the live track, duration, and cover art. |
+| `queue`, `q`, `قائمة` | Displays the next ten upcoming tracks pending in the queue. |
+| `volume <1-1000>`, `صوت` | Drastically alter playback volume. |
+| `filters <name>`, `فلاتر` | Engage `bass`, `nightcore`, or `none`. |
 | `autoplay`, `ap` | Automatically queues similar tracks endlessly. |
-| `loop` | Toggles track looping (repeats current track over and over). |
+| `loop`, `تكرار` | Toggles track looping (repeats current track over and over). |
 | `seek <secs>` | Fast forwards the current track. |
-| `shuffle` | Randomizes the sequence of the queued tracklist. |
+| `shuffle`, `خلط` | Randomizes the sequence of the queued tracklist. |
 
 ---
 
