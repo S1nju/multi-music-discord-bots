@@ -10,6 +10,7 @@ services:
       - "2333:2333"
     environment:
       - SERVER_PORT=2333
+      - YTDLP_COOKIES=${YTDLP_COOKIES}
       - LAVALINK_SERVER_PASSWORD=youshallnotpass
       - YOUTUBE_REFRESH_TOKEN=${YOUTUBE_REFRESH_TOKEN}
       - YOUTUBE_PO_TOKEN=${YOUTUBE_PO_TOKEN}
@@ -22,6 +23,7 @@ services:
       - YOUTUBE_OAUTH_TOKEN=${YOUTUBE_OAUTH_TOKEN}
     env_file:
       - .env
+    command: /bin/bash -c "if [ -n \"$$YTDLP_COOKIES\" ]; then echo \"$$YTDLP_COOKIES\" > /opt/Lavalink/cookies.txt; fi && exec java -jar Lavalink.jar"
     healthcheck:
       test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --header=\"Authorization: youshallnotpass\" --spider http://127.0.0.1:2333/version || exit 1" ]
       interval: 5s
@@ -59,5 +61,4 @@ networks:
   musicbots:
     driver: bridge
 volumes:
-  redis_data:
 
