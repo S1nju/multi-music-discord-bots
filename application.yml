@@ -122,15 +122,16 @@ plugins:
       playback: true
   lavasrc:
     providers:
-      - 'ytsearch:"%ISRC%"'
+      - 'ytdlpsearch:"%ISRC%"'
       - "dzisrc:%ISRC%"
-      - "ytsearch:%QUERY%"
+      - "ytdlpsearch:%QUERY%"
       - "dzsearch:%QUERY%"
       - "jssearch:%QUERY%"
       - "pdsearch:%QUERY%"
       - "scsearch:%QUERY%"
       - "tdsearch:%QUERY%"
-      - "ytdlpsearch:%QUERY%"
+      - 'ytsearch:"%ISRC%"'
+      - "ytsearch:%QUERY%"
     sources:
       spotify: true # Enable Spotify source
       applemusic: true # Enable Apple Music source
