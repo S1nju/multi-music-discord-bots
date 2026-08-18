@@ -24,6 +24,11 @@ lavalink:
     youtubeSearchEnabled: true
     soundcloudSearchEnabled: true
     gc-warnings: true
+    routePlanner:
+      strategy: "RotatingNanoSwitch"
+      ipBlocks:
+        - "${IPV6_BLOCK}"
+      failingAddresses: []
 plugins:
   lavasrc:
     providers:

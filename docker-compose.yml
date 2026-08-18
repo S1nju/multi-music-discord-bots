@@ -12,6 +12,7 @@ services:
       - YOUTUBE_REFRESH_TOKEN=${YOUTUBE_REFRESH_TOKEN}
       - YOUTUBE_PO_TOKEN=${YOUTUBE_PO_TOKEN}
       - YOUTUBE_VISITOR_DATA=${YOUTUBE_VISITOR_DATA}
+      - IPV6_BLOCK=${IPV6_BLOCK}
     healthcheck:
       test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --header=\"Authorization: youshallnotpass\" --spider http://127.0.0.1:2333/version || exit 1" ]
       interval: 5s
