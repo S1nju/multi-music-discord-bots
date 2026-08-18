@@ -63,7 +63,7 @@ plugins:
     allowDirectPlaylistIds: true
     ratelimit:
       ipBlocks:
-        - "${IPV6_BLOCK:""}"
+        - ${IPV6_BLOCK:""}
       excludedIps: []
       strategy: "RotateOnBan" 
       searchTriggersFail: true
