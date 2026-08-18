@@ -45,6 +45,7 @@ plugins:
       - youtube
       - deezer
       - yandexMusic
+  plugins:
   youtube:
     enabled: true
     httpConfig:
@@ -57,57 +58,29 @@ plugins:
       password: ${LAVALINK_PASSWORD:youshallnotpass}
     oauth:
       enabled: true
-      refreshToken: ${YOUTUBE_OAUTH_TOKEN:""} # Paste your YouTube OAuth refresh token here if you have one
+      refreshToken: ${YOUTUBE_REFRESH_TOKEN}   # move the actual value to your .env / docker-compose env, never in this file
+    pot:
+      token: "${YOUTUBE_PO_TOKEN}"                    # generate via youtube-trusted-session-generator
+      visitorData: "${YOUTUBE_VISITOR_DATA}"
     allowSearch: true
     allowDirectVideoIds: true
     allowDirectPlaylistIds: true
-    ratelimit:
-      ipBlocks:
-        - ${IPV6_BLOCK:""}
-      excludedIps: []
-      strategy: "RotateOnBan" 
-      searchTriggersFail: true
-      retryLimit: -1
     clients:
-      - "TVHTML5_SIMPLY"
-      - "ANDROID_VR"
-      - "IOS"
-      - "MUSIC"
-      - "ANDROID_MUSIC"
-      - "WEBEMBEDDED"
+      - "TV"
       - "WEB"
-    TVHTML5_SIMPLY:
+      - "MWEB"
+    TV:
+      playlistLoading: false
+      videoLoading: true
+      searching: false
+      playback: true
+    WEB:
       playlistLoading: true
       videoLoading: true
       searching: true
       playback: true
-    ANDROID_VR:
-      playlistLoading: false
-      videoLoading: true
-      searching: true
-      playback: true
-    IOS:
-      playlistLoading: false
-      videoLoading: true
-      searching: true
-      playback: true
-    MUSIC:
-      playlistLoading: false
-      videoLoading: true
-      searching: true
-      playback: true
-    ANDROID_MUSIC:
-      playlistLoading: false
-      videoLoading: true
-      searching: true
-      playback: true
-    WEBEMBEDDED:
-      playlistLoading: false
-      videoLoading: true
-      searching: true
-      playback: true
-    WEB:
-      playlistLoading: false
+    MWEB:
+      playlistLoading: true
       videoLoading: true
       searching: true
       playback: true
