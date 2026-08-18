@@ -55,7 +55,7 @@ plugins:
       proxyPassword: "${PROXY_PASSWORD}"
     remoteCipher:
       url: "${YT_CIPHER_URL}"
-      password: ${YT_CIPHER_PASSWORD:youshallnotpass}
+      password: ${LAVALINK_PASSWORD:youshallnotpass}
     oauth:
       enabled: true
       refreshToken: ${YOUTUBE_REFRESH_TOKEN}   # move the actual value to your .env / docker-compose env, never in this file
@@ -95,6 +95,7 @@ plugins:
       - "pdsearch:%QUERY%"
       - "scsearch:%QUERY%"
       - "tdsearch:%QUERY%"
+      - "ytdlpsearch:%QUERY%"
     sources:
       spotify: true # Enable Spotify source
       applemusic: true # Enable Apple Music source
@@ -107,7 +108,7 @@ plugins:
       tidal: false # Enable Tidal source
       vkmusic: false # Enable Vk Music source
       qobuz: false # Enabled qobuz source
-      ytdlp: false # Enable yt-dlp source
+      ytdlp: true # Enable yt-dlp source
     lyrics-sources:
       spotify: true # Enable Spotify lyrics source
       deezer: false # Enable Deezer lyrics source
