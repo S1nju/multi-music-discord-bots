@@ -14,6 +14,7 @@ class MusicBot(commands.Bot):
         intents.message_content = True
         intents.voice_states = True
         self.channel_id = os.getenv("BOT_CHANNEL_ID")
+        self.play_letter = os.getenv("BOT_PLAY_LETTER")
         prefix = os.getenv("BOT_PREFIX", "-")
         super().__init__(command_prefix=commands.when_mentioned_or(prefix), intents=intents, help_command=None)
 

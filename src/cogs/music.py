@@ -59,6 +59,32 @@ class MusicCog(commands.Cog):
     async def on_wavelink_track_start(self, payload: wavelink.TrackStartEventPayload):
         pass # In case we want to announce globally
 
+    @commands.Cog.listener()
+    async def on_message(self, message: discord.Message):
+        if message.author.bot:
+            return
+
+        play_letter = getattr(self.bot, 'play_letter', None)
+        if not play_letter:
+            return
+
+        content = message.content.strip()
+        prefix = f"{play_letter.lower()} "
+        
+        if content.lower().startswith(prefix):
+            query = content[len(prefix):].strip()
+            if not query:
+                return
+            
+            ctx = await self.bot.get_context(message)
+            play_cmd = self.bot.get_command("play")
+            if play_cmd:
+                try:
+                    if await play_cmd.can_run(ctx):
+                        await self.play(ctx, query=query)
+                except commands.CommandError:
+                    pass
+
     @commands.command(name="play", aliases=["p"])
     @commands.check(check_chat)
     async def play(self, ctx: commands.Context, *, query: str):

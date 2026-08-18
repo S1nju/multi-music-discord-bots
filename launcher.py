@@ -19,6 +19,7 @@ def main():
             bot_env["BOT_TOKEN"] = token
             bot_env["BOT_PREFIX"] = base_env.get(f"BOT_PREFIX{i}", "-")
             bot_env["BOT_CHANNEL_ID"] = base_env.get(f"BOT_CHANNEL_ID{i}", "")
+            bot_env["BOT_PLAY_LETTER"] = base_env.get(f"BOT_PLAY_LETTER{i}", "")
             
             # Use subprocess to isolate memory and avoid pure async singleton collisions (like Wavelink Pool)
             p = subprocess.Popen([sys.executable, "main.py"], env=bot_env)
