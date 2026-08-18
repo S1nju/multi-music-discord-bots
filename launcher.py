@@ -9,7 +9,7 @@ def main():
     processes = []
     
     # Loop over 1 to 8 bots as defined in the .env and docker-compose
-    for i in range(1, 9):
+    for i in range(1, 10):
         token = base_env.get(f"BOT_TOKEN{i}")
         if token and token.strip() != "":
             print(f"Starting bot {i}...")
