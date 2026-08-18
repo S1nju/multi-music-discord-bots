@@ -38,6 +38,7 @@ plugins:
   lyrics:
     countryCode: en-AU
     geniusApiKey: ""
+  
   lavalyrics:
     sources:
       - genius
@@ -54,7 +55,7 @@ plugins:
       proxyUser: "${PROXY_USER}"
       proxyPassword: "${PROXY_PASSWORD}"
     remoteCipher:
-      url: "${YT_CIPHER_URL}"
+      url: "http://yt-cipher:8001/"
       password: ${LAVALINK_PASSWORD:youshallnotpass}
     oauth:
       enabled: true

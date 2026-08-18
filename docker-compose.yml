@@ -27,6 +27,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 12
+    networks:
+      - musicbots
 
   yt-cipher:
     image: ghcr.io/kikkia/yt-cipher:master
@@ -36,6 +38,8 @@ services:
       - API_TOKEN=youshallnotpass
     ports:
       - "8001:8001"
+    networks:
+      - musicbots
   # bots:
   #   build:
   #     context: .
