@@ -54,8 +54,8 @@ plugins:
       proxyUser: "${PROXY_USER}"
       proxyPassword: "${PROXY_PASSWORD}"
     remoteCipher:
-      url: "http://yt-cipher:8001/"
-      password: ${LAVALINK_PASSWORD:youshallnotpass}
+      url: "${YT_CIPHER_URL}"
+      password: ${YT_CIPHER_PASSWORD:youshallnotpass}
     oauth:
       enabled: true
       refreshToken: ${YOUTUBE_REFRESH_TOKEN}   # move the actual value to your .env / docker-compose env, never in this file
