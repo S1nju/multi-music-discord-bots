@@ -3,7 +3,7 @@ services:
   lavalink:
     build:
       context: .
-      dockerfile: Dockerfile.lavalink
+      dockerfile: ./build-lavalink/Dockerfile.lavalink
     container_name: lavalink
     restart: unless-stopped
 
