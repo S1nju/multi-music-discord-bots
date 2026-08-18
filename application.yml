@@ -52,8 +52,10 @@ plugins:
     allowDirectVideoIds: true
     allowDirectPlaylistIds: true
     clients:
-      - TV
+      - IOS
+      - ANDROID_MUSIC
       - WEB
+  
     # (Residential Proxies) for youtube ip ban
     httpConfig:
       proxyHost: "${PROXY_HOST}" 
