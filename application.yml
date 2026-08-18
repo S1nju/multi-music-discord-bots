@@ -47,11 +47,11 @@ plugins:
       - yandexMusic
   youtube:
     enabled: true
-    HTTP_PROXY: ${YOUTUBE_HTTP_PROXY:""}
-    proxy:
-      url: ${YOUTUBE_PROXY_URL:""}
-      username: ${YOUTUBE_PROXY_USERNAME:""}
-      password: ${YOUTUBE_PROXY_PASSWORD:""}
+    httpConfig:
+      proxyHost: "${PROXY_HOST}"
+      proxyPort: ${PROXY_PORT:823}
+      proxyUser: "${PROXY_USER}"
+      proxyPassword: "${PROXY_PASSWORD}"
     remoteCipher:
       url: "http://yt-cipher:8001/"
       password: ${LAVALINK_PASSWORD:youshallnotpass}
