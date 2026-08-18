@@ -1,11 +1,11 @@
 version: '3.8'
 services:
   lavalink:
-    image: ghcr.io/lavalink-devs/lavalink:4
+    build:
+      context: .
+      dockerfile: Dockerfile.lavalink
     container_name: lavalink
     restart: unless-stopped
-    env_file:
-      - .env
     environment:
       - SERVER_PORT=2333
       - LAVALINK_SERVER_PASSWORD=youshallnotpass
@@ -13,9 +13,6 @@ services:
       - PROXY_PORT=${PROXY_PORT}
       - PROXY_USER=${PROXY_USER}
       - PROXY_PASSWORD=${PROXY_PASSWORD}
-
-    volumes:
-      - ./application.yml:/opt/Lavalink/application.yml
     healthcheck:
       test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --header=\"Authorization: youshallnotpass\" --spider http://127.0.0.1:2333/version || exit 1" ]
       interval: 5s
@@ -32,8 +29,6 @@ services:
     depends_on:
       lavalink:
         condition: service_healthy
-    env_file:
-      - .env
 
     networks:
       - musicbots
