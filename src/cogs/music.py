@@ -124,7 +124,7 @@ class MusicCog(commands.Cog):
             player.queue.clear()
             await ctx.send("✅ تم إيقاف التشغيل وحذف القائمة.")
 
-    @commands.command(name="skip", aliases=["s"])
+    @commands.command(name="skip", aliases=["s","سكب"])
     @commands.check(check_chat)
     async def skip(self, ctx: commands.Context):
         player = cast(wavelink.Player, ctx.guild.voice_client)
@@ -134,7 +134,7 @@ class MusicCog(commands.Cog):
         await player.skip(force=True)
         await ctx.send("⏩ تم التخطي بنجاح.")
 
-    @commands.command(name="volume", aliases=["vol"])
+    @commands.command(name="volume", aliases=["vol","صوت"])
     @commands.check(check_chat)
     async def volume(self, ctx: commands.Context, vol: int):
         player = cast(wavelink.Player, ctx.guild.voice_client)
@@ -146,7 +146,7 @@ class MusicCog(commands.Cog):
         await player.set_volume(vol)
         await ctx.send(f"🔊 تم تغيير مستوى الصوت إلى: `{vol}%`")
 
-    @commands.command(name="nowplaying", aliases=["np"])
+    @commands.command(name="nowplaying", aliases=["np","الان"])
     @commands.check(check_chat)
     async def nowplaying(self, ctx: commands.Context):
         player = cast(wavelink.Player, ctx.guild.voice_client)
@@ -160,7 +160,7 @@ class MusicCog(commands.Cog):
             embed.set_thumbnail(url=track.artwork)
         await ctx.send(embed=embed)
 
-    @commands.command(name="queue", aliases=["q"])
+    @commands.command(name="queue", aliases=["q","قائمة"])
     @commands.check(check_chat)
     async def queue(self, ctx: commands.Context):
         player = cast(wavelink.Player, ctx.guild.voice_client)
@@ -178,7 +178,7 @@ class MusicCog(commands.Cog):
         embed = discord.Embed(title="القائمة الحالية", description=desc, color=discord.Color.blue())
         await ctx.send(embed=embed)
 
-    @commands.command(name="clear")
+    @commands.command(name="clear", aliases=["حذف"])
     @commands.check(check_chat)
     async def clear_queue(self, ctx: commands.Context):
         player = cast(wavelink.Player, ctx.guild.voice_client)
@@ -188,7 +188,7 @@ class MusicCog(commands.Cog):
         player.queue.clear()
         await ctx.send("✅ تم حذف جميع المقاطع من القائمة.")
 
-    @commands.command(name="pause")
+    @commands.command(name="pause", aliases=["وقف"])
     @commands.check(check_chat)
     async def pause(self, ctx: commands.Context):
         player = cast(wavelink.Player, ctx.guild.voice_client)
@@ -196,7 +196,7 @@ class MusicCog(commands.Cog):
             await player.pause(True)
             await ctx.send("⏸️ تم الإيقاف المؤقت.")
 
-    @commands.command(name="resume")
+    @commands.command(name="resume", aliases=["استئناف"])
     @commands.check(check_chat)
     async def resume(self, ctx: commands.Context):
         player = cast(wavelink.Player, ctx.guild.voice_client)
@@ -204,7 +204,7 @@ class MusicCog(commands.Cog):
             await player.pause(False)
             await ctx.send("▶️ تم استكمال التشغيل.")
 
-    @commands.command(name="autoplay", aliases=["ap"])
+    @commands.command(name="autoplay", aliases=["ap", "تشغيل تلقائي"])
     @commands.check(check_chat)
     async def autoplay(self, ctx: commands.Context):
         player = cast(wavelink.Player, ctx.guild.voice_client)
@@ -218,7 +218,7 @@ class MusicCog(commands.Cog):
             player.autoplay = wavelink.AutoPlayMode.enabled
             await ctx.send("✅ تم تفعيل التشغيل التلقائي للاستمرار بتشغيل مقاطع مشابهة.")
 
-    @commands.command(name="loop")
+    @commands.command(name="loop", aliases=["تكرار"])
     @commands.check(check_chat)
     async def loop(self, ctx: commands.Context):
         player = cast(wavelink.Player, ctx.guild.voice_client)
@@ -241,7 +241,7 @@ class MusicCog(commands.Cog):
         await player.seek(seconds * 1000)
         await ctx.send(f"⏩ تم التقديم إلى {seconds} ثانية.")
 
-    @commands.command(name="filters")
+    @commands.command(name="filters", aliases=["فلاتر"])
     @commands.check(check_chat)
     async def filters(self, ctx: commands.Context, filter_name: str = "none"):
         player = cast(wavelink.Player, ctx.guild.voice_client)
@@ -264,7 +264,7 @@ class MusicCog(commands.Cog):
         await player.set_filters(filters)
         await ctx.send(f"✅ تم تفعيل فلتر: `{filter_name}`")
 
-    @commands.command(name="search")
+    @commands.command(name="search", aliases=["بحث"])
     @commands.check(check_chat)
     async def search(self, ctx: commands.Context, *, query: str):
         try:
@@ -304,7 +304,7 @@ class MusicCog(commands.Cog):
         except TimeoutError:
             await ctx.send("⏳ انتهى وقت الاختيار.", delete_after=5)
 
-    @commands.command(name="shuffle")
+    @commands.command(name="shuffle", aliases=["خلط"])
     @commands.check(check_chat)
     async def shuffle(self, ctx: commands.Context):
         player = cast(wavelink.Player, ctx.guild.voice_client)
@@ -313,6 +313,43 @@ class MusicCog(commands.Cog):
             
         player.queue.shuffle()
         await ctx.send("🔀 تم خلط القائمة بنجاح.")
+
+    @commands.command(name="help", aliases=["مساعدة", "اوامر", "أوامر"])
+    @commands.check(check_chat)
+    async def help_cmd(self, ctx: commands.Context):
+        embed = discord.Embed(
+            title="📜 قائمة الأوامر", 
+            description="إليك قائمة بجميع أوامر البوت المتاحة:", 
+            color=discord.Color.blue()
+        )
+        
+        prefix = ctx.prefix
+        play_letter = getattr(self.bot, 'play_letter', None)
+        play_hint = f"أو ببساطة `{play_letter} ` قبل اسم المقطع" if play_letter else ""
+        
+        commands_list = [
+            ("🎵 تشغيل مقطع", f"`{prefix}play` أو `{prefix}p` {play_hint}"),
+            ("⏩ تخطي المقطع", f"`{prefix}skip` أو `{prefix}s` أو `{prefix}سكب`"),
+            ("⏹️ إيقاف وحذف القائمة", f"`{prefix}stop`"),
+            ("⏸️ إيقاف مؤقت", f"`{prefix}pause` أو `{prefix}وقف`"),
+            ("▶️ استئناف", f"`{prefix}resume` أو `{prefix}استئناف`"),
+            ("📜 عرض القائمة", f"`{prefix}queue` أو `{prefix}q` أو `{prefix}قائمة`"),
+            ("🗑️ مسح القائمة", f"`{prefix}clear` أو `{prefix}حذف`"),
+            ("ℹ️ المقطع الحالي", f"`{prefix}nowplaying` أو `{prefix}np` أو `{prefix}الان`"),
+            ("🔊 مستوى الصوت", f"`{prefix}volume` أو `{prefix}vol` أو `{prefix}صوت`"),
+            ("🔄 تشغيل تلقائي", f"`{prefix}autoplay` أو `{prefix}ap` أو `{prefix}تشغيل تلقائي`"),
+            ("🔂 تكرار المقطع", f"`{prefix}loop` أو `{prefix}تكرار`"),
+            ("🔀 خلط القائمة", f"`{prefix}shuffle` أو `{prefix}خلط`"),
+            ("⏩ تقديم المقطع", f"`{prefix}seek`"),
+            ("🔍 بحث", f"`{prefix}search` أو `{prefix}بحث`"),
+            ("🎛️ فلاتر الصوت", f"`{prefix}filters` أو `{prefix}فلاتر` (bass, nightcore, none)"),
+        ]
+        
+        for name, value in commands_list:
+            embed.add_field(name=name, value=value, inline=False)
+            
+        embed.set_footer(text="شكراً لاستخدامك البوت 🎵")
+        await ctx.send(embed=embed)
 
 async def setup(bot):
     await bot.add_cog(MusicCog(bot))
