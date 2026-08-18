@@ -52,6 +52,7 @@ plugins:
     allowDirectVideoIds: true
     allowDirectPlaylistIds: true
     clients:
+      - TV
       - WEB
     # (Residential Proxies) for youtube ip ban
     httpConfig:
