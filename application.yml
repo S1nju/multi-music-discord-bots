@@ -44,13 +44,12 @@ plugins:
     enabled: true
     oauth:
       enabled: true
+      refreshToken: "${YOUTUBE_REFRESH_TOKEN:}"
     allowSearch: true
     allowDirectVideoIds: true
     allowDirectPlaylistIds: true
     clients:
-      - IOS
-      - ANDROID_TESTSUITE
-      - ANDROID_MUSIC
+      - WEB
     # (Residential Proxies) for youtube ip ban
     httpConfig:
       proxyHost: "${PROXY_HOST}" 
