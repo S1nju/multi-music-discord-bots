@@ -26,7 +26,7 @@ class MusicBot(commands.Bot):
             if filename.endswith('.py'):
                 await self.load_extension(f'src.cogs.{filename[:-3]}')
                 
-        uri = os.getenv("WAVELINK_URI", "http://127.17.0.1:2333")
+        uri = os.getenv("WAVELINK_URI", "http://172.17.0.1:2333")
         password = os.getenv("WAVELINK_PASSWORD", "youshallnotpass")
         node = wavelink.Node(uri=uri, password=password)
         await wavelink.Pool.connect(nodes=[node], client=self, cache_capacity=100)
