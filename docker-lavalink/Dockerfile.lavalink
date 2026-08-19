@@ -8,16 +8,11 @@ RUN apt-get update && apt-get install -y software-properties-common curl && \
     curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp && \
     chmod a+rx /usr/local/bin/yt-dlp && \
     echo '#!/bin/bash' > /opt/Lavalink/yt-dlp-wrapper && \
-    echo 'PROXY_ARGS=""' >> /opt/Lavalink/yt-dlp-wrapper && \
-    echo 'if [ -n "$YOUTUBE_PROXY_URL" ] && [ -n "$YOUTUBE_PROXY_USERNAME" ]; then' >> /opt/Lavalink/yt-dlp-wrapper && \
-    echo '  HOST_PORT=$(echo "$YOUTUBE_PROXY_URL" | sed "s|http://||; s|https://||")' >> /opt/Lavalink/yt-dlp-wrapper && \
-    echo '  PROXY_ARGS="--proxy http://$YOUTUBE_PROXY_USERNAME:$YOUTUBE_PROXY_PASSWORD@$HOST_PORT"' >> /opt/Lavalink/yt-dlp-wrapper && \
-    echo 'fi' >> /opt/Lavalink/yt-dlp-wrapper && \
     echo 'COOKIE_ARGS=""' >> /opt/Lavalink/yt-dlp-wrapper && \
     echo 'if [ -s /opt/Lavalink/cookies.txt ]; then' >> /opt/Lavalink/yt-dlp-wrapper && \
     echo '  COOKIE_ARGS="--cookies /opt/Lavalink/cookies.txt"' >> /opt/Lavalink/yt-dlp-wrapper && \
     echo 'fi' >> /opt/Lavalink/yt-dlp-wrapper && \
-    echo 'exec /usr/local/bin/yt-dlp $PROXY_ARGS $COOKIE_ARGS "$@"' >> /opt/Lavalink/yt-dlp-wrapper && \
+    echo 'exec /usr/local/bin/yt-dlp $COOKIE_ARGS "$@"' >> /opt/Lavalink/yt-dlp-wrapper && \
     chmod +x /opt/Lavalink/yt-dlp-wrapper && \
     chown lavalink:lavalink /opt/Lavalink/yt-dlp-wrapper
 
