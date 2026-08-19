@@ -122,13 +122,14 @@ plugins:
       playback: true
   lavasrc:
     providers:
+      - "scsearch:%QUERY%"
+      - 'scsearch:"%ISRC%"'
       - 'ytdlpsearch:"%ISRC%"'
       - "dzisrc:%ISRC%"
       - "ytdlpsearch:%QUERY%"
       - "dzsearch:%QUERY%"
       - "jssearch:%QUERY%"
       - "pdsearch:%QUERY%"
-      - "scsearch:%QUERY%"
       - "tdsearch:%QUERY%"
       - 'ytsearch:"%ISRC%"'
       - "ytsearch:%QUERY%"
