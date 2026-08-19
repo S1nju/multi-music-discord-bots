@@ -6,7 +6,13 @@ RUN apt-get update && apt-get install -y software-properties-common curl && \
     apt-get install -y python3.11 && \
     update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1 && \
     curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp && \
-    chmod a+rx /usr/local/bin/yt-dlp
+    chmod a+rx /usr/local/bin/yt-dlp && \
+    echo '#!/bin/bash' > /opt/Lavalink/yt-dlp-wrapper && \
+    echo 'exec /usr/local/bin/yt-dlp --cookies /opt/Lavalink/cookies.txt "$@"' >> /opt/Lavalink/yt-dlp-wrapper && \
+    chmod +x /opt/Lavalink/yt-dlp-wrapper && \
+    chown lavalink:lavalink /opt/Lavalink/yt-dlp-wrapper
+
 USER lavalink
 WORKDIR /opt/Lavalink
 COPY application.yml /opt/Lavalink/application.yml
+ENTRYPOINT ["/bin/bash", "-c", "if [ -n \"$YTDLP_COOKIES\" ]; then echo \"$YTDLP_COOKIES\" | base64 -d | tr -d '\r' > /opt/Lavalink/cookies.txt; fi && exec java -Djdk.tls.client.protocols=TLSv1.1,TLSv1.2 -Xmx4G -jar Lavalink.jar"]
