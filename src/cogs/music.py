@@ -94,12 +94,16 @@ class MusicCog(commands.Cog):
         if not hasattr(player, "autoplay") or player.autoplay != wavelink.AutoPlayMode.enabled:
             player.autoplay = wavelink.AutoPlayMode.partial
 
+        tracks = None
         try:
-            tracks: wavelink.Search = await wavelink.Playable.search(query, source=wavelink.TrackSource.YouTube)
-        except wavelink.LavalinkLoadException:
+            tracks = await wavelink.Playable.search(query, source=wavelink.TrackSource.SoundCloud)
+        except Exception:
+            pass
+
+        if not tracks:
             try:
-                tracks: wavelink.Search = await wavelink.Playable.search(query, source=wavelink.TrackSource.SoundCloud)
-            except Exception as e:
+                tracks = await wavelink.Playable.search(query, source=wavelink.TrackSource.YouTube)
+            except Exception:
                 return await ctx.send(f"❌ لم أتمكن من تشغيل المقطع أو أن المنصة محظورة.")
             
         if not tracks:
