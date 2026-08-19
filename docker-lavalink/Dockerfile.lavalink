@@ -13,11 +13,15 @@ RUN apt-get update && apt-get install -y software-properties-common curl && \
     echo '  HOST_PORT=$(echo "$YOUTUBE_PROXY_URL" | sed "s|http://||; s|https://||")' >> /opt/Lavalink/yt-dlp-wrapper && \
     echo '  PROXY_ARGS="--proxy http://$YOUTUBE_PROXY_USERNAME:$YOUTUBE_PROXY_PASSWORD@$HOST_PORT"' >> /opt/Lavalink/yt-dlp-wrapper && \
     echo 'fi' >> /opt/Lavalink/yt-dlp-wrapper && \
-    echo 'exec /usr/local/bin/yt-dlp $PROXY_ARGS --extractor-args "youtube:player_client=ios,web" --cookies /opt/Lavalink/cookies.txt "$@"' >> /opt/Lavalink/yt-dlp-wrapper && \
+    echo 'COOKIE_ARGS=""' >> /opt/Lavalink/yt-dlp-wrapper && \
+    echo 'if [ -s /opt/Lavalink/cookies.txt ]; then' >> /opt/Lavalink/yt-dlp-wrapper && \
+    echo '  COOKIE_ARGS="--cookies /opt/Lavalink/cookies.txt"' >> /opt/Lavalink/yt-dlp-wrapper && \
+    echo 'fi' >> /opt/Lavalink/yt-dlp-wrapper && \
+    echo 'exec /usr/local/bin/yt-dlp $PROXY_ARGS $COOKIE_ARGS "$@"' >> /opt/Lavalink/yt-dlp-wrapper && \
     chmod +x /opt/Lavalink/yt-dlp-wrapper && \
     chown lavalink:lavalink /opt/Lavalink/yt-dlp-wrapper
 
 USER lavalink
 WORKDIR /opt/Lavalink
 COPY application.yml /opt/Lavalink/application.yml
-ENTRYPOINT ["/bin/bash", "-c", "if [ -n \"$YTDLP_COOKIES\" ]; then echo \"$YTDLP_COOKIES\" | tr -d '\"' | base64 -d | tr -d '\r' > /opt/Lavalink/cookies.txt; fi && exec java -Djdk.tls.client.protocols=TLSv1.1,TLSv1.2 -Xmx4G -jar Lavalink.jar"]
+ENTRYPOINT ["/bin/bash", "-c", "if [ -n \"$YTDLP_COOKIES\" ]; then echo \"$YTDLP_COOKIES\" | tr -d '\"\\r\\n ' | base64 -d | tr -d '\r' > /opt/Lavalink/cookies.txt; fi && exec java -Djdk.tls.client.protocols=TLSv1.1,TLSv1.2 -Xmx4G -jar Lavalink.jar"]
