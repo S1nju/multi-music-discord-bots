@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y software-properties-common curl && \
     echo '  HOST_PORT=$(echo "$YOUTUBE_PROXY_URL" | sed "s|http://||; s|https://||")' >> /opt/Lavalink/yt-dlp-wrapper && \
     echo '  PROXY_ARGS="--proxy http://$YOUTUBE_PROXY_USERNAME:$YOUTUBE_PROXY_PASSWORD@$HOST_PORT"' >> /opt/Lavalink/yt-dlp-wrapper && \
     echo 'fi' >> /opt/Lavalink/yt-dlp-wrapper && \
-    echo 'exec /usr/local/bin/yt-dlp $PROXY_ARGS --extractor-args "youtube:player_client=android,web" --cookies /opt/Lavalink/cookies.txt "$@"' >> /opt/Lavalink/yt-dlp-wrapper && \
+    echo 'exec /usr/local/bin/yt-dlp $PROXY_ARGS --extractor-args "youtube:player_client=ios,web" --cookies /opt/Lavalink/cookies.txt "$@"' >> /opt/Lavalink/yt-dlp-wrapper && \
     chmod +x /opt/Lavalink/yt-dlp-wrapper && \
     chown lavalink:lavalink /opt/Lavalink/yt-dlp-wrapper
 
