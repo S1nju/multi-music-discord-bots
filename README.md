@@ -14,7 +14,7 @@
 
 ## 🌟 Overview
 
-**Multi-Music Discord Bots** is an enterprise-grade infrastructure capable of running **multiple Discord Music Bots (up to 9) simultaneously** out of a single codebase, mapped to a unified Lavalink V4 Node. 
+**Multi-Music Discord Bots** is capable of running **multiple Discord Music Bots (up to 9) simultaneously** out of a single codebase, mapped to a unified Lavalink V4 Node. 
 
 Tired of deploying separate containers and repositories for every new bot you want to run? Our robust python `launcher.py` spins up all your bots concurrently inside a single environment under isolated memory pools, ensuring they never clash or face "Singleton Wavelink Pool" overlaps.
 
